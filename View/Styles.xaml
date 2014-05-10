@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart">
+
+    <chart:ResourceDictionaryCollection x:Key="DefaultColorPalette">
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush1" Color="#FF007C9C" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush2" Color="#FF019FCC" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush3" Color="#FF8FCD3E" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush4" Color="#FF82B93A" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush5" Color="#FF638A2D" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush6" Color="#FFE3AAD6" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush7" Color="#FF4EA2CF" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush8" Color="#FFFF73AB" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush9" Color="#FFFF7D7D" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush10" Color="#FF6685A2" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush11" Color="#FF1D97E3" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush12" Color="#FF61B7EB" />
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush13" Color="#FFD88BC7" />
+        </ResourceDictionary>
+    </chart:ResourceDictionaryCollection>
+
+    <chart:ResourceDictionaryCollection x:Key="RadialGaugeChartColorPalette">
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush1" Color="#FF8FCD3E" />
+        </ResourceDictionary>
+        <!--<ResourceDictionary>
+            <SolidColorBrush x:Key="Brush2" Color="#FFFF2900" />
+        </ResourceDictionary>-->
+    </chart:ResourceDictionaryCollection>
+    
+    <chart:ResourceDictionaryCollection x:Key="BurnDownChartColorPalette">
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush1" Color="#FF8FCD3E" />
+        </ResourceDictionary>
+    </chart:ResourceDictionaryCollection>
+
+    <chart:ResourceDictionaryCollection x:Key="SideChartColorPalette">
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="Brush1" Color="#FF4EA2CF" />
+        </ResourceDictionary>
+    </chart:ResourceDictionaryCollection>
+
+    <Style x:Key="BasePanel" TargetType="Panel">
+        <Setter Property="Background" Value="#FF000000"/>
+    </Style>
+    
+    <Style x:Key="ContentPanel" TargetType="Panel">
+        <Setter Property="Background" Value="#FF333333"/>
+    </Style>
+    
+    <Style x:Key="BaseChartStyle" TargetType="chart:ChartBase">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="#FF333333"/>
+        <Setter Property="Foreground" Value="#FFEEEEEE"/>
+    </Style>
+
+    <Style x:Key="BaseTextStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI Light"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="Foreground" Value="#FFEEEEEE"/>
+    </Style>
+
+    <Style x:Key="HeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="FontSize" Value="42"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+    </Style>
+
+    <Style x:Key="SubHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="TextTrimming" Value="WordEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Typography.StylisticSet20" Value="True"/>
+        <Setter Property="Typography.DiscretionaryLigatures" Value="True"/>
+        <Setter Property="Typography.CaseSensitiveForms" Value="True"/>
+    </Style>
+
+    <Style x:Key="ContentHeaderTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubHeaderTextStyle}">
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style x:Key="ContentTextStyle" TargetType="TextBlock" BasedOn="{StaticResource SubHeaderTextStyle}">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style x:Key="ContentSoftTextStyle" TargetType="TextBlock" BasedOn="{StaticResource ContentTextStyle}">
+        <Setter Property="Foreground" Value="#FFC8C8C8"/>
+    </Style>
+    
+    <Style x:Key="ChartTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="FontSize" Value="26"/>
+    </Style>
+    <Style x:Key="ChartSubTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextStyle}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Opacity" Value="0.75"/>
+    </Style>
+
+    <Style x:Key="SideChartStyle" TargetType="chart:ChartBase" BasedOn="{StaticResource BaseChartStyle}">
+        <Setter Property="Width" Value="320"/>
+        <Setter Property="Height" Value="256"/>
+    </Style>
+
+    <Style x:Key="BurnDownChartStyle" TargetType="chart:ChartBase" BasedOn="{StaticResource BaseChartStyle}">
+        <Setter Property="Width" Value="768"/>
+        <Setter Property="Height" Value="320"/>
+    </Style>
+
+    <Style x:Key="RadialGaugeChartStyle" TargetType="chart:ChartBase" BasedOn="{StaticResource BaseChartStyle}">
+        <Setter Property="Width" Value="1856"/>
+        <Setter Property="Height" Value="350"/>
+    </Style>
+</ResourceDictionary>

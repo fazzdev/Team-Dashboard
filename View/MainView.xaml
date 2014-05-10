@@ -1,0 +1,124 @@
+﻿<Window
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:local="clr-namespace:TeamDashboard" x:Class="TeamDashboard.MainView"
+		mc:Ignorable="d"
+		WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+		Title="Team Dashboard" Height="1080" Width="1920">
+	<Window.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Styles.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<local:ViewModelPackage x:Key="ViewModelPackage" />
+		</ResourceDictionary>
+	</Window.Resources>
+    <DockPanel Style="{StaticResource BasePanel}" DataContext="{StaticResource ViewModelPackage}">
+
+        <DockPanel Style="{StaticResource ContentPanel}" DockPanel.Dock="Top" Margin="8,8,8,0">
+			<StackPanel DockPanel.Dock="Right" Margin="16,8,16,8" HorizontalAlignment="Right">
+				<TextBlock Style="{StaticResource HeaderTextStyle}" TextAlignment="Right" Text="{Binding ClockViewModel.Time}"/>
+				<TextBlock Style="{StaticResource SubHeaderTextStyle}" TextAlignment="Right" Text="{Binding ClockViewModel.Date}"/>
+			</StackPanel>
+			<StackPanel Margin="16,8,0,8">
+				<TextBlock Style="{StaticResource HeaderTextStyle}" Text="{Binding Source={x:Static local:Settings.Default}, Path=TeamName, Mode=OneWay}"/>
+                <TextBlock Style="{StaticResource SubHeaderTextStyle}" Text="{Binding Source={x:Static local:Settings.Default}, Path=TeamMission, Mode=OneWay}"/>
+			</StackPanel>
+			<!--<TextBlock DockPanel.Dock="Right" Style="{StaticResource BasicTextStyle}" HorizontalAlignment="Right" VerticalAlignment="Top">Last sync: 23 Apr 2013</TextBlock>-->
+		</DockPanel>
+
+        <DockPanel Style="{StaticResource ContentPanel}" DockPanel.Dock="Bottom" Margin="8,0,8,8">
+			<chart:RadialGaugeChart
+				Style="{StaticResource RadialGaugeChartStyle}"
+				ChartTitle="Code Metrics"
+				ChartSubTitle=""
+				FontSize="16px"
+				Palette="{StaticResource DefaultColorPalette}"
+				ChartTitleVisibility="Collapsed"
+				ChartLegendVisibility="Visible"                
+				SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+				<chart:RadialGaugeChart.Series>
+					<chart:ChartSeries SeriesTitle="Code Metrics" DisplayMember="Display" ValueMember="Value" ItemsSource="{Binding CodeMetricsViewModel.CodeMetrics}" />
+				</chart:RadialGaugeChart.Series>
+			</chart:RadialGaugeChart>
+		</DockPanel>
+
+        <StackPanel Style="{StaticResource ContentPanel}" Orientation="Vertical" DockPanel.Dock="Right" Margin="0,8,8,8">
+			<chart:ClusteredColumnChart     
+				Style="{StaticResource SideChartStyle}"                
+				ChartTitle="{Binding VelocityViewModel.Title}"                
+				ChartSubTitle="" 
+				Palette="{StaticResource SideChartColorPalette}"
+				FontSize="16px"
+				IsRowColumnSwitched="false"
+				ChartTitleVisibility="Visible"
+				ChartLegendVisibility="Collapsed"               
+				SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+				<chart:ClusteredColumnChart.Series>
+					<chart:ChartSeries SeriesTitle="Velocity" DisplayMember="Display" ValueMember="Value" ItemsSource="{Binding VelocityViewModel.Velocity}" />
+				</chart:ClusteredColumnChart.Series>
+			</chart:ClusteredColumnChart>
+			<chart:ClusteredColumnChart     
+				Style="{StaticResource SideChartStyle}"                
+				ChartTitle="{Binding DefectsGrowthViewModel.Title}"                
+				ChartSubTitle="" 
+				Palette="{StaticResource SideChartColorPalette}"
+				FontSize="16px"
+				IsRowColumnSwitched="false"
+				ChartTitleVisibility="Visible"
+				ChartLegendVisibility="Collapsed"
+				SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+				<chart:ClusteredColumnChart.Series>
+					<chart:ChartSeries SeriesTitle="Defects Growth" DisplayMember="Display" ValueMember="Value" ItemsSource="{Binding DefectsGrowthViewModel.DefectsGrowth}" />
+				</chart:ClusteredColumnChart.Series>
+			</chart:ClusteredColumnChart>
+		</StackPanel>
+
+        <StackPanel Style="{StaticResource ContentPanel}" Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="8">
+			<StackPanel>
+				<chart:ClusteredColumnChart 
+					Style="{StaticResource BurnDownChartStyle}"  
+					ChartTitle="{Binding SprintBurndownViewModel.SprintTitle}"                
+					ChartSubTitle="" 
+					Palette="{StaticResource BurnDownChartColorPalette}"
+					FontSize="16px"
+					IsRowColumnSwitched="false"
+					ChartTitleVisibility="Visible"
+					ChartLegendVisibility="Collapsed"                 
+					SelectedItem="{Binding SelectedItem, Mode=TwoWay}" >
+					<chart:ClusteredColumnChart.Series>
+						<chart:ChartSeries SeriesTitle="Sprint Burndown" DisplayMember="Display" ValueMember="Value" ItemsSource="{Binding SprintBurndownViewModel.SprintBurndown}" />
+					</chart:ClusteredColumnChart.Series>
+				</chart:ClusteredColumnChart>
+				<TextBlock Style="{StaticResource ChartTitleStyle}" Margin="24,0,0,0" Text="Sprint Backlog"/>
+                <local:BacklogItemView Margin="24,16,8,0" BacklogItem="{Binding SprintStoriesViewModel.BacklogItem1}" />
+                <local:BacklogItemView Margin="24,8,8,0" BacklogItem="{Binding SprintStoriesViewModel.BacklogItem2}"/>
+                <local:BacklogItemView Margin="24,8,8,0" BacklogItem="{Binding SprintStoriesViewModel.BacklogItem3}"/>
+			</StackPanel>
+			<StackPanel>
+                <TextBlock Style="{StaticResource ChartTitleStyle}" Margin="24,24,0,0" Text="Build Status"/>
+				<StackPanel Orientation="Horizontal" Margin="24,16,0,0">
+					<StackPanel>
+                        <local:BuildView Height="64" Width="352" BuildInfo="{Binding BuildsViewModel.BuildInfo1}"/>
+                        <local:BuildView Height="64" Width="352" Margin="0,8,0,0" BuildInfo="{Binding BuildsViewModel.BuildInfo2}"/>
+                        <local:BuildView Height="64" Width="352" Margin="0,8,0,0" BuildInfo="{Binding BuildsViewModel.BuildInfo3}"/>
+					</StackPanel>
+					<StackPanel Margin="24,0,0,0">
+                        <local:BuildView Height="64" Width="352" BuildInfo="{Binding BuildsViewModel.BuildInfo4}"/>
+                        <local:BuildView Height="64" Width="352" Margin="0,8,0,0" BuildInfo="{Binding BuildsViewModel.BuildInfo5}"/>
+                        <local:BuildView Height="64" Width="352" Margin="0,8,0,0" BuildInfo="{Binding BuildsViewModel.BuildInfo6}"/>
+					</StackPanel>
+				</StackPanel>
+                <TextBlock Style="{StaticResource ChartTitleStyle}" Margin="24,36,0,0" Text="Latest Commits"/>
+                <local:CommitView Margin="24,16,24,0" CommitInfo="{Binding CommitsViewModel.CommitInfo1}"/>
+                <local:CommitView Margin="24,8,24,0" CommitInfo="{Binding CommitsViewModel.CommitInfo2}"/>
+                <local:CommitView Margin="24,8,24,0" CommitInfo="{Binding CommitsViewModel.CommitInfo3}"/>
+			</StackPanel>
+		</StackPanel>
+		
+	</DockPanel>
+	
+</Window>

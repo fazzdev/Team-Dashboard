@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="TeamDashboard.CommitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="64" d:DesignWidth="256">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel Style="{StaticResource ContentPanel}">
+        <Image x:Name="UserImage" DockPanel.Dock="Left" Width="48" Height="48" VerticalAlignment="Top" Source="{StaticResource DefaultUserImage}"/>
+        <TextBlock x:Name="BranchText" Style="{StaticResource ContentHeaderTextStyle}" DockPanel.Dock="Top" Margin="8,0,0,0">Branch</TextBlock>
+        <TextBlock x:Name="CommitText" Style="{StaticResource ContentTextStyle}" Margin="8,8,0,0">Commit Message</TextBlock>
+    </DockPanel>
+</UserControl>
